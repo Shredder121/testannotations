@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
+
+    <name>Shredder121 Test Annotations</name>
+
+    <inceptionYear>2016</inceptionYear>
+
+    <url>https://github.com/Shredder121/testannotations</url>
+    <description>Miscellaneous annotations for jUnit rules</description>
+
+    <groupId>com.github.shredder121</groupId>
+    <artifactId>testannotations</artifactId>
+    <version>0.1.0.BUILD-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <organization>
+        <name>Shredder121</name>
+        <url>https://github.com/Shredder121</url>
+    </organization>
+
+    <scm>
+        <connection>scm:git:git@github.com:Shredder121/testannotations.git</connection>
+        <developerConnection>scm:git:git@github.com:Shredder121/testannotations.git</developerConnection>
+        <url>https://github.com/Shredder121/testannotations.git</url>
+    </scm>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <junit.version>4.12</junit.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+        </dependency>
+    </dependencies>
+</project>
