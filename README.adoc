@@ -1,11 +1,13 @@
 = testannotations
 
+:version: 0.1.0.BUILD-SNAPSHOT
+
 Built-in setup/teardown rules for the masses
 
 == Getting started
 
-```java
-
+[source,java]
+----
 public class TestClass {
 
     @Rule
@@ -13,5 +15,19 @@ public class TestClass {
     public static final TestRule testRule = TestAnnotations.RULES;
 
 }
+----
 
-```
+== Examples
+
+include::src/test/java/com/github/shredder121/testannotations/timezone/TimeZoneRuleTest.java[lines=27..44]
+
+== How to get it
+
+[source,xml,subs="attributes+"]
+----
+<dependency>
+    <groupId>com.github.shredder121</groupId>
+    <artifactId>testannotations</artifactId>
+    <version>{version}</version>
+</dependency>
+----
