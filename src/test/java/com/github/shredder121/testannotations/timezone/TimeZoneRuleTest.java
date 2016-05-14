@@ -15,8 +15,10 @@
  */
 package com.github.shredder121.testannotations.timezone;
 
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static org.junit.Assert.assertTrue;
 
+import java.lang.annotation.Retention;
 import java.util.TimeZone;
 
 import org.junit.ClassRule;
@@ -40,5 +42,16 @@ public class TimeZoneRuleTest {
     @TimeZoneTest("CET")
     public void testLocalTZ() {
         assertTrue(TimeZone.getDefault().getID().equals("CET"));
+    }
+
+    @Test
+    @CetTest
+    public void testMetaAnnotation() {
+        assertTrue(TimeZone.getDefault().getID().equals("CET"));
+    }
+
+    @Retention(RUNTIME)
+    @TimeZoneTest("CET")
+    public @interface CetTest {
     }
 }
