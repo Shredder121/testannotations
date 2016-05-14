@@ -15,8 +15,8 @@
  */
 package com.github.shredder121.testannotations.timezone;
 
+import static com.github.shredder121.testannotations.testutil.TestAnnotationsAssertions.assertThat;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
-import static org.junit.Assert.assertTrue;
 
 import java.lang.annotation.Retention;
 import java.util.TimeZone;
@@ -35,19 +35,19 @@ public class TimeZoneRuleTest {
 
     @Test
     public void testGlobalTZ() {
-        assertTrue(TimeZone.getDefault().getID().equals("UTC"));
+        assertThat(TimeZone.getDefault()).hasID("UTC");
     }
 
     @Test
     @TimeZoneTest("CET")
     public void testLocalTZ() {
-        assertTrue(TimeZone.getDefault().getID().equals("CET"));
+        assertThat(TimeZone.getDefault()).hasID("CET");
     }
 
     @Test
     @CetTest
     public void testMetaAnnotation() {
-        assertTrue(TimeZone.getDefault().getID().equals("CET"));
+        assertThat(TimeZone.getDefault()).hasID("CET");
     }
 
     @Retention(RUNTIME)
