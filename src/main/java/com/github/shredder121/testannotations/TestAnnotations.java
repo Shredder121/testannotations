@@ -16,7 +16,6 @@
 package com.github.shredder121.testannotations;
 
 import org.junit.rules.RuleChain;
-import org.junit.rules.TestRule;
 
 import com.github.shredder121.testannotations.timezone.TimeZoneRule;
 
@@ -29,7 +28,7 @@ import com.github.shredder121.testannotations.timezone.TimeZoneRule;
  */
 public class TestAnnotations {
 
-    public static final TestRule RULES
+    public static final RuleChain RULES
             = RuleChain.emptyRuleChain()
             .around(new TimeZoneRule())
             ;
