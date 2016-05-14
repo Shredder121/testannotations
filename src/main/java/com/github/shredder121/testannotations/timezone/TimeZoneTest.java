@@ -22,6 +22,7 @@ import java.lang.annotation.*;
  *
  * @author Shredder121
  */
+@Inherited
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.TYPE})
