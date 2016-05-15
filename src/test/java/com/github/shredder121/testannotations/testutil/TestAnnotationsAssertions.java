@@ -15,6 +15,7 @@
  */
 package com.github.shredder121.testannotations.testutil;
 
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.assertj.core.api.Assertions;
@@ -25,6 +26,10 @@ import org.assertj.core.api.Assertions;
  * @author Shredder121
  */
 public class TestAnnotationsAssertions extends Assertions {
+
+    public static LocaleAssert assertThat(Locale locale) {
+        return new LocaleAssert(locale);
+    }
 
     public static TimeZoneAssert assertThat(TimeZone actual) {
         return new TimeZoneAssert(actual);

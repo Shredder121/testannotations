@@ -19,7 +19,8 @@ public class TestClass {
 
 == Examples
 
-include::src/test/java/com/github/shredder121/testannotations/timezone/TimeZoneRuleTest.java[lines=27..44]
+include::src/test/java/com/github/shredder121/testannotations/timezone/TimeZoneRuleTest.java[]
+include::src/test/java/com/github/shredder121/testannotations/locale/LocaleRuleTest.java[]
 
 == How to get it
 
