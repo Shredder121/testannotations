@@ -16,71 +16,31 @@
 package com.github.shredder121.testannotations.timezone;
 
 import java.io.Closeable;
-import java.lang.annotation.Annotation;
 import java.time.ZoneId;
-import java.util.*;
-import java.lang.annotation.*;
+import java.util.TimeZone;
 
-import org.junit.*;
-import org.junit.rules.TestRule;
-import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+
+import com.github.shredder121.testannotations.AbstractRule;
 
 /**
  * A {link TestRule} that switches the JVM's default time zone for the duration of a test.
  *
  * @author Shredder121
  */
-public class TimeZoneRule implements TestRule {
+public class TimeZoneRule extends AbstractRule<TimeZoneTest> {
 
-    private static final Collection<Class<? extends Annotation>> SKIP;
-
-    static {
-        Collection<Class<? extends Annotation>> toSkip = new HashSet<>();
-        Collections.addAll(toSkip,
-                //java.lang.annotation
-                Documented.class, Inherited.class, Retention.class, Target.class,
-                //java.lang
-                java.lang.SuppressWarnings.class,
-                //org.junit
-                After.class, AfterClass.class, Before.class, BeforeClass.class, Rule.class, Test.class
-        );
-
-        SKIP = Collections.unmodifiableCollection(toSkip);
+    public TimeZoneRule() {
+        super(TimeZoneTest.class);
     }
 
     @Override
-    public Statement apply(Statement original, Description description) {
-        return maybeChangeTimezone(original, description);
-    }
-
-    private static Statement maybeChangeTimezone(Statement original, Description description) {
-        TimeZoneTest annotation = findAnnotation(description, TimeZoneTest.class);
+    public Statement maybeChange(Statement original, TimeZoneTest annotation) {
         if (annotation != null) {
             return new TimeZoneStatement(original, parseToTimeZone(annotation), new TimeZoneResetter());
         } else {
             return original;
         }
-    }
-
-    private static <A extends Annotation> A findAnnotation(Description description, Class<A> cl) {
-        Collection<Annotation> annotations = description.getAnnotations();
-        return recursiveFindAnnotation(annotations.toArray(new Annotation[annotations.size()]), cl);
-    }
-
-    private static <A extends Annotation> A recursiveFindAnnotation(Annotation[] annotations, Class<A> cl) {
-        for (Annotation annotation : annotations) {
-            Class<? extends Annotation> type = annotation.annotationType();
-            if (type.equals(cl)) {
-                return cl.cast(annotation);
-            } else if (!SKIP.contains(type)) {
-                A found = recursiveFindAnnotation(type.getAnnotations(), cl);
-                if (found != null) {
-                    return found;
-                }
-            }
-        }
-        return null;
     }
 
     private static TimeZone parseToTimeZone(TimeZoneTest timeZone) {
