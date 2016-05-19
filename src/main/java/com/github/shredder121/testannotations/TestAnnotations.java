@@ -17,6 +17,7 @@ package com.github.shredder121.testannotations;
 
 import org.junit.rules.RuleChain;
 
+import com.github.shredder121.testannotations.locale.LocaleRule;
 import com.github.shredder121.testannotations.timezone.TimeZoneRule;
 
 /**
@@ -30,6 +31,7 @@ public class TestAnnotations {
 
     public static final RuleChain RULES
             = RuleChain.emptyRuleChain()
+            .around(new LocaleRule())
             .around(new TimeZoneRule())
             ;
 
