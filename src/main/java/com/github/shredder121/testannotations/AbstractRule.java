@@ -30,7 +30,7 @@ public abstract class AbstractRule<A extends Annotation> implements TestRule {
     private static final Collection<Class<? extends Annotation>> SKIP;
 
     static {
-        Collection<Class<? extends Annotation>> toSkip = new HashSet<Class<? extends Annotation>>();
+        Collection<Class<? extends Annotation>> toSkip = new HashSet<>();
         Collections.addAll(toSkip,
                 //java.lang.annotation
                 Documented.class, Inherited.class, Retention.class, Target.class,

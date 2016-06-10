@@ -15,10 +15,14 @@
  */
 package com.github.shredder121.testannotations.timezone;
 
+
 import java.io.Closeable;
 import java.time.ZoneId;
 import java.util.TimeZone;
 
+import org.apache.commons.lang3.JavaVersion;
+import org.apache.commons.lang3.SystemUtils;
+import org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement;
 import org.junit.runners.model.Statement;
 
 import com.github.shredder121.testannotations.AbstractRule;
@@ -44,7 +48,21 @@ public class TimeZoneRule extends AbstractRule<TimeZoneTest> {
     }
 
     private static TimeZone parseToTimeZone(TimeZoneTest timeZone) {
-        return TimeZone.getTimeZone(ZoneId.of(timeZone.value()));
+        String id = timeZone.value();
+        if (SystemUtils.isJavaVersionAtLeast(JavaVersion.JAVA_1_8)) {
+            return getTimeZoneJavaTime(id);
+        } else {
+            return getTimeZoneLegacy(id);
+        }
+    }
+
+    @IgnoreJRERequirement //conditionally executed
+    private static TimeZone getTimeZoneJavaTime(String id) {
+        return TimeZone.getTimeZone(ZoneId.of(id));
+    }
+
+    private static TimeZone getTimeZoneLegacy(String id) {
+        return TimeZone.getTimeZone(id);
     }
 
     static class TimeZoneStatement extends Statement {
